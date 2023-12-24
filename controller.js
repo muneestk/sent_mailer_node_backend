@@ -3,7 +3,13 @@ import mailSenterSave from "./model.js";
 
 export const companyData = async (req, res, next) => {
   try {
-    const companyData = await mailSenterSave.find();
+    const {search}=req.query
+    console.log(typeof(search),'search')
+    let query={}
+    if(search.length>0) query.companyName= {$regex:search,$options:'i'}
+
+    console.log(query)
+    const companyData = await mailSenterSave.find(query);
     if (companyData) {
       return res.status(200).json(companyData);
     } else {
@@ -62,7 +68,7 @@ export const mailSenter = async (req, res, next) => {
   6282798759</p>
 
   <!-- Include a link to download your PDF resume -->
-  <p>Attached is my <a href="https://drive.google.com/file/d/1rRwmZubtubJcfZ2u7ei37DvRhJx4NxIE/view?usp=sharing" download>resume</a> for your reference.</p>
+  <p>Attached is my <a href="https://drive.google.com/file/d/1CSoX8XXPuAs6rX2N955hn3ygTj1LtUuX/view?usp=sharing" download>resume</a> for your reference.</p>
 
 </body>
 </html>
@@ -104,7 +110,7 @@ export const mailSenter = async (req, res, next) => {
   </p>
 
   <p>
-    <a href="https://drive.google.com/file/d/1rRwmZubtubJcfZ2u7ei37DvRhJx4NxIE/view?usp=sharing" download>Download My Resume (PDF)</a>
+    <a href="https://drive.google.com/file/d/1CSoX8XXPuAs6rX2N955hn3ygTj1LtUuX/view?usp=sharing" download>Download My Resume (PDF)</a>
   </p>
 
 </body>
@@ -136,7 +142,7 @@ export const mailSenter = async (req, res, next) => {
 
   <p>
     I am impressed by ${companyName}'s innovative projects and commitment to excellence. 
-    Enclosed is my <a href="https://drive.google.com/file/d/1rRwmZubtubJcfZ2u7ei37DvRhJx4NxIE/view?usp=sharing" download>resume</a> for your review. 
+    Enclosed is my <a href="https://drive.google.com/file/d/1CSoX8XXPuAs6rX2N955hn3ygTj1LtUuX/view?usp=sharing" download>resume</a> for your review. 
     I am excited about the opportunity to discuss how my skills align with your team's goals.
   </p>
 
